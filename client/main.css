@@ -20,3 +20,22 @@ body {
 .message__guestCard {
   background-color: #f3f3f3 !important;
 }
+/* !important is bad practise */
+
+.UserAuth__h3 {
+  text-align: center;
+}
+
+.UserAuth__form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: auto;
+}
+
+.messanger__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+}

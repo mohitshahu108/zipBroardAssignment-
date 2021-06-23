@@ -10,12 +10,15 @@ import { MessagesCollection } from "../api/MessagesCollection";
 
 export default function Messanger() {
   const user = useTracker(() => Meteor.user());
-  const messages = useTracker(() => MessagesCollection.find({}).fetch());
+  const messages = useTracker(() =>
+    MessagesCollection.find(
+      {},
+      {
+        sort: { createdAt: -1 },
+      }
+    ).fetch()
+  );
   const [input, setInput] = useState("");
-  // const [messages, setMessages] = useState([
-  //   { username: "mohit", text: "this demo message" },
-  // ]);
-  console.log(messages);
   const sendMessage = (e) => {
     // all logic to send messager goes here
     e.preventDefault();
@@ -31,11 +34,13 @@ export default function Messanger() {
 
   return (
     <div>
-      <div className="user" onClick={logout}>
-        {user.username} 🚪
+      <div className="Messanger__logout" onClick={logout}>
+        <Button variant="contained" color="primary">
+          {user.username} :Logout
+        </Button>
       </div>
       <h1>MessangerDashbord</h1>
-      <form>
+      <form className='messanger__form'>
         <FormControl>
           <InputLabel htmlFor="my-input">Enter Message</InputLabel>
           <Input
@@ -45,16 +50,16 @@ export default function Messanger() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
           />
-          <Button
-            disabled={!input}
-            type="submit"
-            onClick={sendMessage}
-            variant="contained"
-            color="primary"
-          >
-            Send Message
-          </Button>
         </FormControl>
+        <Button
+          disabled={!input}
+          type="submit"
+          onClick={sendMessage}
+          variant="contained"
+          color="primary"
+        >
+          Send Message
+        </Button>
       </form>
       {messages.map((message) => {
         return <Message key={message._id} message={message} />;
