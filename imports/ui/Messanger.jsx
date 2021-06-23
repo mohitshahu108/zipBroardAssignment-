@@ -62,9 +62,11 @@ export default function Messanger() {
           Send Message
         </Button>
       </form>
-      {messages.map((message) => {
-        return <Message key={message._id} message={message} />;
-      })}
+      {
+        messages.map(message=>(
+          <Message key={message._id} message={message} ></Message>
+        ))
+      }
     </div>
   );
 }
