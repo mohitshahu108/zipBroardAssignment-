@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useTracker } from "meteor/react-meteor-data";
+import "../api/method/messagesMethods";
 
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
@@ -22,7 +23,7 @@ export default function Messanger() {
   const sendMessage = (e) => {
     // all logic to send messager goes here
     e.preventDefault();
-    MessagesCollection.insert({
+    Meteor.call("messages.insert", {
       username: user.username,
       text: input.trim(),
       createdAt: new Date(),
@@ -40,7 +41,7 @@ export default function Messanger() {
         </Button>
       </div>
       <h1>MessangerDashbord</h1>
-      <form className='messanger__form'>
+      <form className="messanger__form">
         <FormControl>
           <InputLabel htmlFor="my-input">Enter Message</InputLabel>
           <Input
