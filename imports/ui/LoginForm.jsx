@@ -12,12 +12,16 @@ export const LoginForm = () => {
 
   const login = (e) => {
     e.preventDefault();
-    Meteor.loginWithPassword(username, password);
+    Meteor.loginWithPassword(username, password, (err) => {
+      alert(err);
+    });
   };
 
   const register = (e) => {
     e.preventDefault();
-    Accounts.createUser({ username: username, password: password });
+    Accounts.createUser({ username: username, password: password }, (err) => {
+      alert(err);
+    });
   };
 
   return (
@@ -57,7 +61,7 @@ export const LoginForm = () => {
           >
             Log In
           </Button>
-          <p>New to Messanger?</p>
+          <p>New to Messenger?</p>
           <p>Register Now...👉</p>
           <Button
             disabled={!username}
